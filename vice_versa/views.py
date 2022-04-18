@@ -2,12 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 def home(request):
-	return HttpResponse(
-		'''<h1>Vice Versa</h1>
-		<textarea id="home" name="home" rows="4" cols="50"></textarea><br>
-		<button>Reverse!</button>'''
 
-		)
+	return render(request, 'home.html')
 
 def main(request):
-	return render (request, 'main.html')
+	user_text = request.GET['usertext']
+	reversed_text = user_text[::-1]
+	return render (request, 'main.html', 
+		{'usertext': user_text, 'reversedtext': reversed_text})
